@@ -81,4 +81,14 @@ def get_playlist(user_id, playlist_id):
         playlist_id=playlist_id,
     )
 
-    return Playlist().from_spotify(_get(url))
+    results = _get(url)
+    next_results_url = results['tracks']['next']
+
+    # Get all tracks. Spotify paginates long results
+    while next_results_url:
+        paginated_results = _get(next_results_url)
+        next_results_url = paginated_results['next']
+
+        results['tracks']['items'] += paginated_results['items']
+
+    return Playlist().from_spotify(results)
