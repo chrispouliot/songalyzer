@@ -21,14 +21,14 @@ OK_STATUSES = [200, 201, 202, 204]
 ERROR_STATUSES = [*USER_ERROR_STATUSES, RATE_LIMIT_STATUS, 500, 502, 503]
 
 
-def raise_for_status(status_code):
+def _raise_for_status(status_code):
     if status_code in ERROR_STATUSES:
         if status_code in USER_ERROR_STATUSES:
             raise AuthError("Failed to authenticate with Spotify. Status code {}".format(status_code))
         raise ServiceError("Spotify server error. Status code {}".format(status_code))
 
 
-def _authorize(re_auth=False):
+def _authenticate(re_auth=False):
     # TODO: why use globals instead of a class
     global TOKEN_EXPIRY_DATE, GRANTED_TOKEN
     token_valid = TOKEN_EXPIRY_DATE > datetime.datetime.now()
@@ -46,7 +46,7 @@ def _authorize(re_auth=False):
         data=data
     )
 
-    raise_for_status(r.status_code)
+    _raise_for_status(r.status_code)
 
     body = r.json()
     expiry = body.get("expires_in")
@@ -65,11 +65,11 @@ def _authorize(re_auth=False):
 
 
 def _get(url):
-    token = _authorize()
+    token = _authenticate()
     headers = {"Authorization": "Bearer {token}".format(token=token)}
 
     r = requests.get(url, headers=headers)
-    raise_for_status(r.status_code)
+    _raise_for_status(r.status_code)
 
     return r.json()
 
@@ -91,4 +91,4 @@ def get_playlist(user_id, playlist_id):
 
         results['tracks']['items'] += paginated_results['items']
 
-    return Playlist().from_spotify(results)
+    return Playlist.from_spotify(results)
