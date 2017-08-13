@@ -7,6 +7,9 @@ def get_music_service(playlist_query):
     if "spotify" in playlist_query:
             return SpotifyService(playlist_query)
 
+    if "soundcloud" in playlist_query:
+        return SoundCloudService(playlist_query)
+
     # Sanity check, should never get here (famous last words)
     raise InvalidQueryError("Could not read playlist query")
 
@@ -35,3 +38,11 @@ class SpotifyService(MusicService):
 
     def get_playlist(self):
         return spotify_get_playlist(self.user_id, self.playlist_id)
+
+
+class SoundCloudService(MusicService):
+    def __init__(self, playlist_query):
+        pass
+
+    def get_playlist(self):
+        pass

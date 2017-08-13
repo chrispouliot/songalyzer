@@ -3,7 +3,8 @@ import requests
 import os
 from requests.auth import HTTPBasicAuth
 
-from exceptions import AuthError, ServiceError
+from exceptions import AuthError
+from request_helpers import raise_for_status
 from serializers import Playlist
 
 BASE_URL = "https://api.spotify.com/v1"
@@ -19,13 +20,6 @@ USER_ERROR_STATUSES = [400, 401, 403]
 RATE_LIMIT_STATUS = 429
 OK_STATUSES = [200, 201, 202, 204]
 ERROR_STATUSES = [*USER_ERROR_STATUSES, RATE_LIMIT_STATUS, 500, 502, 503]
-
-
-def _raise_for_status(status_code):
-    if status_code in ERROR_STATUSES:
-        if status_code in USER_ERROR_STATUSES:
-            raise AuthError("Failed to authenticate with Spotify. Status code {}".format(status_code))
-        raise ServiceError("Spotify server error. Status code {}".format(status_code))
 
 
 def _authenticate(re_auth=False):
@@ -46,7 +40,7 @@ def _authenticate(re_auth=False):
         data=data
     )
 
-    _raise_for_status(r.status_code)
+    raise_for_status(r.status_code, ERROR_STATUSES, USER_ERROR_STATUSES)
 
     body = r.json()
     expiry = body.get("expires_in")
@@ -69,7 +63,7 @@ def _get(url):
     headers = {"Authorization": "Bearer {token}".format(token=token)}
 
     r = requests.get(url, headers=headers)
-    _raise_for_status(r.status_code)
+    raise_for_status(r.status_code, ERROR_STATUSES, USER_ERROR_STATUSES)
 
     return r.json()
 
