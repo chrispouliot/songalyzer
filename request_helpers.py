@@ -30,8 +30,8 @@ _method_map = {
 def raise_for_status(status_code, error_statuses, user_error_statuses):
     if status_code in error_statuses:
         if status_code in user_error_statuses:
-            raise AuthError("Failed to authenticate with Spotify. Status code {}".format(status_code))
-        raise ServiceError("Spotify server error. Status code {}".format(status_code))
+            raise AuthError("Failed to authenticate. Status code {}".format(status_code))
+        raise ServiceError("Server error. Status code {}".format(status_code))
 
 
 def make_request(method, url, auth=None, headers=None, data=None):
