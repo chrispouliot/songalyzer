@@ -1,10 +1,8 @@
 import datetime
-import requests
 import os
-from requests.auth import HTTPBasicAuth
 
 from exceptions import AuthError
-from request_helpers import raise_for_status
+from request_helpers import Auth, make_request, Methods, raise_for_status
 from serializers import Playlist
 
 BASE_URL = "https://api.spotify.com/v1"
@@ -34,12 +32,8 @@ def _authenticate(re_auth=False):
         "grant_type": "client_credentials"
     }
 
-    r = requests.post(
-        AUTHORIZE_URL,
-        auth=HTTPBasicAuth(CLIENT_ID, CLIENT_SECRET),
-        data=data
-    )
-
+    auth = Auth(CLIENT_ID, CLIENT_SECRET)
+    r = make_request(Methods.POST, AUTHORIZE_URL, auth=auth, data=data)
     raise_for_status(r.status_code, ERROR_STATUSES, USER_ERROR_STATUSES)
 
     body = r.json()
@@ -62,7 +56,7 @@ def _get(url):
     token = _authenticate()
     headers = {"Authorization": "Bearer {token}".format(token=token)}
 
-    r = requests.get(url, headers=headers)
+    r = make_request(Methods.GET, url, headers=headers)
     raise_for_status(r.status_code, ERROR_STATUSES, USER_ERROR_STATUSES)
 
     return r.json()
