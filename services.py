@@ -39,7 +39,7 @@ class SpotifyService(MusicService):
     def get_playlist(self):
         return spotify_get_playlist(self.user_id, self.playlist_id)
 
-
+# TODO: SoundCloud API currently unavailable
 class SoundCloudService(MusicService):
     def __init__(self, playlist_query):
         pass
