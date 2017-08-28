@@ -1,4 +1,4 @@
-from exceptions import SerializationError
+from .exceptions import SerializationError
 
 
 class Song(object):

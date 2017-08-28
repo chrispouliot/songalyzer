@@ -1,9 +1,9 @@
 import datetime
 import os
 
-from exceptions import AuthError
-from request_helpers import Auth, make_request, Methods, raise_for_status
-from serializers import Playlist
+from .exceptions import AuthError
+from .request_helpers import Auth, make_request, Methods, raise_for_status
+from .serializers import Playlist
 
 BASE_URL = "https://api.spotify.com/v1"
 AUTHORIZE_URL = "https://accounts.spotify.com/api/token"

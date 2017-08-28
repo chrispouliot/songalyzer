@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from exceptions import InvalidQueryError
-from spotify import get_playlist as spotify_get_playlist
+from .exceptions import InvalidQueryError
+from .spotify import get_playlist as spotify_get_playlist
 
 
 def get_music_service(playlist_query):

@@ -1,7 +1,7 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
-from exceptions import AuthError, ServiceError
+from .exceptions import AuthError, ServiceError
 
 
 class Methods(object):
