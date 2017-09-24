@@ -1,0 +1,39 @@
+{
+  "name": "songalyzer",
+  "version": "1.0.0",
+  "description": "Analyze playlists",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moxuz/songalyzer.git"
+  },
+  "author": "Chris Pouliot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moxuz/songalyzer/issues"
+  },
+  "homepage": "https://github.com/moxuz/songalyzer#readme",
+  "dependencies": {
+    "install": "^0.10.1",
+    "npm": "^5.4.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2",
+    "webpack": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.7.2",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0",
+    "react-router-dom": "^4.2.2"
+  }
+}

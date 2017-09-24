@@ -6,3 +6,7 @@ insert_final_newline = true
 [*.{html,py}]
 indent_style = space
 indent_size = 4
+# 2 space indentation for JS
+[*.{js,jsx}]
+indent_style = space
+indent_size = 2
