@@ -1,12 +1,11 @@
-from flask import Flask
+from sanic import Sanic
 
 from server.services import get_music_service
 from server.analyzer import get_average_popularity, find_common_artists, find_common_songs
 
 
-app = Flask(__name__, static_url_path='')
+app = Sanic(__name__)
+app.static('/static', './static')
+app.static('/', './static/index.html')
 
-
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
+app.run(host="0.0.0.0", port=8000)
