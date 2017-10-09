@@ -16,6 +16,15 @@ class Song(object):
         self.duration = duration
 
     @staticmethod
+    def __dict__(self):
+        return {
+            'title': self.title,
+            'album': self.album,
+            'artist': self.artist,
+            'popularity': self.popularity,
+            'duration': self.duration
+        }
+
     def from_spotify(song_dict):
         try:
             artists = [artist['name'] for artist in song_dict['artists']]
@@ -49,6 +58,14 @@ class Playlist(object):
         self.owner = owner
         self.name = name
         self.description = description
+
+    def __dict__(self):
+        return {
+            'songs': self.songs,
+            'owner': self.owner,
+            'name': self.name,
+            'description': self.description
+        }
 
     @staticmethod
     def from_spotify(playlist_dict):

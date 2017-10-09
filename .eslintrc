@@ -2,6 +2,7 @@
 	"extends": [
 		"airbnb"
 	],
+	"parser": "babel-eslint",
 	"parserOptions": {
 		"ecmaVersion": 2016,
 		"sourceType": "module",
@@ -10,7 +11,8 @@
 		}
   },
   "rules": {
-		"semi": [2, "never"]
+		"semi": [2, "never"],
+		"no-underscore-dangle": 0
   },
 	"env": {
 		"es6": true,

@@ -1,12 +1,23 @@
-import React from 'react'
+import { React, Component } from 'react'
 
 import SearchBar from './SearchBar'
-import { SearchClick } from '../handlers'
+// import { SearchClick } from '../handlers'
 
-const App = () => (
-  <div>
-    <SearchBar onClick={SearchClick} />
-  </div>
-)
+class App extends Component {
+
+  static state = {}
+
+  searchClick = () => {
+
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBar onClick={this.searchClick} />
+      </div>
+    )
+  }
+}
 
 export default App

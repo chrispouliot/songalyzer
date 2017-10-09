@@ -10,7 +10,6 @@ def get_music_service(playlist_query):
     if "soundcloud" in playlist_query:
         return SoundCloudService(playlist_query)
 
-    # Sanity check, should never get here (famous last words)
     raise InvalidQueryError("Could not read playlist query")
 
 
