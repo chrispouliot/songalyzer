@@ -14,6 +14,6 @@ const _fetch = (method, url, object) => {
 
 const _post = (url, object) => _fetch('POST', url, object)
 
-export async function analyzePost(object)  {
-  let response = await _post(analyzeUrl, object)
+export function analyzePlaylist(object) {
+  return _post(analyzeUrl, object).then(resp => resp.json())
 }

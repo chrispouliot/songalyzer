@@ -1,14 +1,15 @@
-import { React, Component } from 'react'
+import React, { Component } from 'react'
 
 import SearchBar from './SearchBar'
-// import { SearchClick } from '../handlers'
+import { analyzePlaylist } from '.././utils/fetch'
 
 class App extends Component {
 
   static state = {}
 
-  searchClick = () => {
-
+  static async searchClick(input) {
+    const data = await analyzePlaylist(input)
+    console.log(data)
   }
 
   render() {

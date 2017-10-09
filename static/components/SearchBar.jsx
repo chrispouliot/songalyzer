@@ -1,14 +1,37 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-const SearchBar = props => (
-  <div>
-    <input type="text" />
-    <button onClick={props.onClick}>
-      Search
-    </button>
-  </div>
-)
+class SearchBar extends Component {
+
+  static state = {
+    input: '',
+  }
+
+  handleChange(evt) {
+    this.setState({
+      input: evt.target.value,
+    })
+  }
+
+  handleClick() {
+    this.props.onClick(this.state.input)
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="text" />
+        <button
+          value={this.state.input}
+          onChange={evt => this.handleChange(evt)}
+          onClick={this.handleClick}
+        >
+          Search
+        </button>
+      </div>)
+  }
+
+}
 
 SearchBar.propTypes = {
   onClick: PropTypes.func.isRequired,
