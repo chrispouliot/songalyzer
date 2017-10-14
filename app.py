@@ -12,7 +12,7 @@ app.static('/', './static/index.html')
 
 @app.route('/analyze', methods=['GET'])
 async def analyze(request):
-    playlist_url = request.json.get('playlist_url')
+    playlist_url = request.raw_args.get('playlist_url')
     if not playlist_url:
         raise InvalidQueryError("Invalid Playlist URL")
 

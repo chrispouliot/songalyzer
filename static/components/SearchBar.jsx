@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 
 class SearchBar extends Component {
 
-  static state = {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  state = {
     input: '',
   }
 

@@ -5,9 +5,9 @@ import { analyzePlaylist } from '.././utils/fetch'
 
 class App extends Component {
 
-  static state = {}
+  state = {}
 
-  static async searchClick(input) {
+  async searchClick(input) {
     const data = await analyzePlaylist(input)
     console.log(data)
   }
