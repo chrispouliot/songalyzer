@@ -1,8 +1,6 @@
 import requests
 from requests.auth import HTTPBasicAuth
 
-from .exceptions import AuthError, ServiceError
-
 
 class Methods(object):
     POST = 'post'
@@ -25,13 +23,6 @@ _method_map = {
     Methods.POST: requests.post,
     Methods.GET: requests.get,
 }
-
-
-def raise_for_status(status_code, error_statuses, user_error_statuses):
-    if status_code in error_statuses:
-        if status_code in user_error_statuses:
-            raise AuthError("Failed to authenticate. Status code {}".format(status_code))
-        raise ServiceError("Server error. Status code {}".format(status_code))
 
 
 def make_request(method, url, auth=None, headers=None, data=None):

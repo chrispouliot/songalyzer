@@ -16,10 +16,6 @@ class BaseHTTPError(SanicException):
         }
 
 
-class AuthError(BaseHTTPError):
-    code = 403
-
-
 class ServiceError(BaseHTTPError):
     code = 500
 

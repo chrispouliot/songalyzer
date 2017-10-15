@@ -26,6 +26,7 @@ def error_middleware(request, exception):
 
 @app.route('/analyze', methods=['GET'])
 async def analyze(request):
+    print(request.raw_args)
     playlist_url = request.raw_args.get('playlist_url')
     if not playlist_url:
         raise InvalidQueryError("Invalid Playlist URL")

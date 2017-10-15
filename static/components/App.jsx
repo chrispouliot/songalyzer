@@ -8,7 +8,7 @@ class App extends Component {
   state = {}
 
   async searchClick(input) {
-    const data = await analyzePlaylist(input)
+    const data = await analyzePlaylist({ playlist_url: input })
     console.log(data)
   }
 
