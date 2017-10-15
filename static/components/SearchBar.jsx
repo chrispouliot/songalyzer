@@ -6,6 +6,7 @@ class SearchBar extends Component {
   constructor() {
     super()
     this.handleClick = this.handleClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   state = {
@@ -13,12 +14,15 @@ class SearchBar extends Component {
   }
 
   handleChange(evt) {
+    console.log(evt)
     this.setState({
       input: evt.target.value,
     })
   }
 
   handleClick() {
+    console.log("handleClick")
+    console.log(this.state.input)
     this.props.onClick(this.state.input)
   }
 
@@ -28,7 +32,7 @@ class SearchBar extends Component {
         <input type="text" />
         <button
           value={this.state.input}
-          onChange={evt => this.handleChange(evt)}
+          onChange={this.handleChange}
           onClick={this.handleClick}
         >
           Search

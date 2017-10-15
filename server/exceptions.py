@@ -1,18 +1,32 @@
-class AuthError(Exception):
-    pass
+from sanic.exceptions import SanicException
 
 
-class RateLimitError(Exception):
-    pass
+class BaseHTTPError(SanicException):
+    message = ''
+    code = 500
+
+    def __init__(self, message):
+        super().__init__(self)
+        self.message = message
+
+    def __dict__(self):
+        return {
+            'code': self.code,
+            'message': self.message,
+        }
 
 
-class ServiceError(Exception):
-    pass
+class AuthError(BaseHTTPError):
+    code = 403
 
 
-class InvalidQueryError(Exception):
-    pass
+class ServiceError(BaseHTTPError):
+    code = 500
 
 
-class SerializationError(Exception):
-    pass
+class InvalidQueryError(BaseHTTPError):
+    code = 400
+
+
+class SerializationError(BaseHTTPError):
+    code = 500
