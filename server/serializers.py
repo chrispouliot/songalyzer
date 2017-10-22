@@ -1,3 +1,4 @@
+from .analyzer import get_average_popularity, get_total_duration
 from .exceptions import SerializationError
 
 
@@ -22,7 +23,7 @@ class Song(object):
             'album': self.album,
             'artist': self.artist,
             'popularity': self.popularity,
-            'duration': self.duration
+            'duration': self.duration,
         }
 
     def from_spotify(song_dict):
@@ -34,8 +35,7 @@ class Song(object):
             album = song_dict['album']
             popularity = song_dict['popularity']
 
-            duration_ms = song_dict['duration_ms']
-            duration = (duration_ms / (1000 * 60)) % 60
+            duration = song_dict['duration_ms'] / 1000
             return Song(
                 artist=artist,
                 title=title,
@@ -52,19 +52,25 @@ class Playlist(object):
     owner = ""
     name = ""
     description = ""
+    popularity = 0
+    duration = 0
 
     def __init__(self, songs, owner, name, description):
         self.songs = songs
         self.owner = owner
         self.name = name
         self.description = description
+        self.popularity = get_average_popularity(songs)
+        self.duration = get_total_duration(songs)
 
     def __dict__(self):
         return {
             'songs': self.songs,
             'owner': self.owner,
             'name': self.name,
-            'description': self.description
+            'description': self.description,
+            'popularity': self.popularity,
+            'duration': self.duration,
         }
 
     @staticmethod

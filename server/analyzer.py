@@ -9,6 +9,10 @@ def get_average_popularity(songs):
     return functools.reduce((lambda x, y: x + y.popularity), songs, 0) // len(songs)
 
 
+def get_total_duration(songs):
+    return functools.reduce((lambda x, y: x + y.duration), songs, 0)
+
+
 def find_common_songs(songs1, songs2):
     # TODO: probably can do this more succinctly.. more... better
     # I'm sure you can filter on object properties
