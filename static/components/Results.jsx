@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-export default class Results extends React.Component {
+import Result from './Result'
+
+export default class Results extends Component {
   render() {
     return (
+      // TODO: Dont render based on name
       <div>
-        <p>Hey</p>
+        {this.props.playlists.map(playlist => <Result playlist={playlist} key={playlist.name} />)}
       </div>
     )
   }
+}
+
+Results.propTypes = {
+  playlists: PropTypes.arrayOf(PropTypes.object).isRequired,
 }

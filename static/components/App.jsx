@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <div>
         <SearchBar onClick={this.searchClick} />
-        <Results popularity={this.state.playlists} />
+        <Results playlists={this.state.playlists} />
       </div>
     )
   }
