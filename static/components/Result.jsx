@@ -13,13 +13,19 @@ const resultDivStyle = {
 export default class Result extends Component {
   render() {
     const playlist = this.props.playlist
+    const hours = playlist.duration / 3600
+    const decimal = hours % 1
+
+    const durationSeconds = Math.floor(decimal * 60)
+    const durationHours = Math.floor(hours)
+
     return (
       <div style={resultDivStyle}>
         <h2>{playlist.name} by {playlist.owner.id}</h2>
         <p style={descriptionStyle}>{playlist.description}</p>
         <ul>
           <li>Songs: {playlist.songs.length}</li>
-          <li>Durarion: {playlist.duration}</li>
+          <li>Durarion: {durationHours}h {durationSeconds}m</li>
           <li>Average Popularity: {playlist.popularity}</li>
         </ul>
       </div>
