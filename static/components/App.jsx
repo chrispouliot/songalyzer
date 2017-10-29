@@ -10,23 +10,32 @@ class App extends Component {
     super()
     this.state = {
       playlists: [],
+      loading: false,
     }
     this.searchClick = this.searchClick.bind(this)
+    this.setLoading = this.setLoading.bind(this)
+  }
+
+  setLoading() {
+    this.setState({
+      loading: true,
+    })
   }
 
   async searchClick(input) {
     const data = await analyzePlaylist({ playlist_url: input })
-    console.log(data)
+
     this.setState({
       playlists: data.playlists,
+      loading: false,
     })
   }
 
   render() {
     return (
       <div>
-        <SearchBar onClick={this.searchClick} />
-        <Results playlists={this.state.playlists} />
+        <SearchBar setLoading={this.setLoading} onClick={this.searchClick} />
+        <Results loading={this.state.loading} playlists={this.state.playlists} />
       </div>
     )
   }

@@ -14,16 +14,14 @@ class SearchBar extends Component {
   }
 
   handleChange(evt) {
-    console.log(evt)
     this.setState({
       input: evt.target.value,
     })
   }
 
   handleClick() {
-    console.log("handleClick")
-    console.log(this.state.input)
     this.props.onClick(this.state.input)
+    this.props.setLoading()
   }
 
   render() {
@@ -39,6 +37,7 @@ class SearchBar extends Component {
 }
 
 SearchBar.propTypes = {
+  setLoading: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
 }
 
