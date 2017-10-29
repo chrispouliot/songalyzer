@@ -1,6 +1,30 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+const inputStyle = {
+  padding: '10px',
+  margin: '10px',
+  height: '20px',
+  width: '500px',
+  border: '1px solid #eaeaea',
+  outline: 'none',
+  fontSize: '14px',
+}
+
+const buttonStyle = {
+  borderRadius: '2px',
+  background: '#ADD8E6',
+  border: '1px solid #ADD8E6',
+  color: '#FFFFFF',
+  cursor: 'default',
+  fontSize: '14px',
+  fontWeight: 'bold',
+  width: '100px',
+  padding: '0 16px',
+  height: '36px',
+  textShadow: '0 0 2px #2f4f4f',
+}
+
 class SearchBar extends Component {
 
   constructor() {
@@ -27,8 +51,8 @@ class SearchBar extends Component {
   render() {
     return (
       <div>
-        <input type="text" value={this.state.input} onChange={this.handleChange} />
-        <button onClick={this.handleClick}>
+        <input style={inputStyle} type="text" value={this.state.input} onChange={this.handleChange} />
+        <button style={buttonStyle} onClick={this.handleClick}>
           Search
         </button>
       </div>)

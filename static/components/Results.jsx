@@ -3,11 +3,6 @@ import PropTypes from 'prop-types'
 
 import Result from './Result'
 
-const resultStyle = {
-  display: 'inline-block',
-  margin: '20px',
-}
-
 export default class Results extends Component {
 
   renderLoading(loading) {
@@ -19,7 +14,7 @@ export default class Results extends Component {
       // TODO: Dont render based on name
       <div>
         {this.renderLoading(this.props.loading)}
-        {this.props.playlists.map(playlist => <Result style={resultStyle} playlist={playlist} key={playlist.name} />)}
+        {this.props.playlists.map(playlist => <Result playlist={playlist} key={playlist.name} />)}
       </div>
     )
   }
