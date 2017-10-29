@@ -30,15 +30,20 @@ def middleware_error(request, exception):
 
 @app.route('/analyze', methods=['GET'])
 async def analyze(request):
-    playlist_url = request.raw_args.get('playlist_url')
-    if not playlist_url:
+    raw_input = request.raw_args.get('input')
+    if not raw_input:
         raise InvalidQueryError("Invalid Playlist URL")
 
-    music_service = get_music_service(playlist_url)
-    playlist = music_service.get_playlist()
+    playlists = raw_input.split(',')
+
+    analyzed_playlists = []
+    for playlist in playlists:
+        # TODO: Async per playlist
+        music_service = get_music_service(playlist)
+        analyzed_playlists.append(music_service.get_playlist())
 
     return response.json({
-        "playlists": [playlist]
+        "playlists": analyzed_playlists
     })
 
 

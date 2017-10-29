@@ -5,7 +5,7 @@ export default class Result extends Component {
   render() {
     const playlist = this.props.playlist
     return (
-      <div>
+      <div style={this.props.style}>
         <h2>{playlist.name} by {playlist.owner.id}</h2>
         <p>{playlist.description}</p>
         <ul>
@@ -20,5 +20,6 @@ export default class Result extends Component {
 
 // TODO: Object is of multiple types. Should look into addressing forbidden thing
 Result.propTypes = {
-  playlist: PropTypes.object.isRequired
+  style: PropTypes.object.isRequired,
+  playlist: PropTypes.object.isRequired,
 }

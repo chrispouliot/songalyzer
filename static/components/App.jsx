@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   async searchClick(input) {
-    const data = await analyzePlaylist({ playlist_url: input })
+    const data = await analyzePlaylist({ input })
 
     this.setState({
       playlists: data.playlists,
