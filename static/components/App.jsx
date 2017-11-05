@@ -4,6 +4,15 @@ import SearchBar from './SearchBar'
 import Results from './Results'
 import { analyzePlaylist } from '.././utils/fetch'
 
+const outerAppStyle = {
+  width: '100%',
+}
+
+const innerAppStyle = {
+  display: 'table',
+  margin: '0 auto',
+}
+
 class App extends Component {
 
   constructor() {
@@ -33,9 +42,11 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <SearchBar setLoading={this.setLoading} onClick={this.searchClick} />
-        <Results loading={this.state.loading} playlists={this.state.playlists} />
+      <div style={outerAppStyle}>
+        <div style={innerAppStyle}>
+          <SearchBar setLoading={this.setLoading} onClick={this.searchClick} />
+          <Results loading={this.state.loading} playlists={this.state.playlists} />
+        </div>
       </div>
     )
   }

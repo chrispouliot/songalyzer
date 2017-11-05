@@ -1,4 +1,4 @@
-from .analyzer import get_average_popularity, get_total_duration
+from .analyzer import get_average_popularity, get_total_duration, sort_songs_by_attr
 from .exceptions import SerializationError
 
 
@@ -56,7 +56,7 @@ class Playlist(object):
     duration = 0
 
     def __init__(self, songs, owner, name, description):
-        self.songs = songs
+        self.songs = sort_songs_by_attr(songs, 'popularity')
         self.owner = owner
         self.name = name
         self.description = description

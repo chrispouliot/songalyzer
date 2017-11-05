@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+const outerDivStyle = {
+  display: 'table',
+  margin: '0 auto',
+}
+
 const inputStyle = {
   padding: '10px',
   margin: '10px',
@@ -50,7 +55,7 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div>
+      <div style={outerDivStyle}>
         <input style={inputStyle} type="text" value={this.state.input} onChange={this.handleChange} />
         <button style={buttonStyle} onClick={this.handleClick}>
           Search

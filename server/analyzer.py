@@ -1,4 +1,9 @@
 import functools
+from operator import attrgetter
+
+
+def sort_songs_by_attr(songs, attr):
+    return sorted(songs, attrgetter(attr))
 
 
 def get_average_popularity(songs):

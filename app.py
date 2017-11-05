@@ -2,8 +2,9 @@ import logging
 
 from sanic import Sanic, response
 from sanic.exceptions import SanicException
-
-from server.analyzer import get_average_popularity, find_common_artists, find_common_songs
+from server.analyzer import get_average_popularity, \
+    find_common_artists, \
+    find_common_songs
 from server.exceptions import InvalidQueryError
 from server.services import get_music_service
 
@@ -41,6 +42,7 @@ async def analyze(request):
         # TODO: Async per playlist
         music_service = get_music_service(playlist)
         analyzed_playlists.append(music_service.get_playlist())
+
 
     return response.json({
         "playlists": analyzed_playlists
