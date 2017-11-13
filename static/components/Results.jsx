@@ -15,6 +15,7 @@ export default class Results extends Component {
       <div>
         {this.renderLoading(this.props.loading)}
         {this.props.playlists.map(playlist => <Result playlist={playlist} key={playlist.name} />)}
+        <h2>Common songs</h2>
       </div>
     )
   }

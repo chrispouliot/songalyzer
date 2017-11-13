@@ -1,7 +1,7 @@
 import logging
 
 from sanic import Sanic, response
-from sanic.exceptions import SanicException
+from sanic.exceptions import ServerError
 from server.analyzer import get_average_popularity, \
     find_common_artists, \
     find_common_songs
@@ -14,35 +14,26 @@ app.static('/static', './static')
 app.static('/', './static/index.html')
 
 
-@app.exception(SanicException)
-def middleware_error(request, exception):
-    message = "An error occured while handling your request"
-    if hasattr(exception, 'message'):
-        message = exception.message
-
-    if exception.status_code == 500:
-        logging.error(exception)
-
-    return response.json(
-        {'message': message},
-        status=exception.status_code
-    )
+# @app.exception(SanicException)
+# def middleware_error(request, exception):
+#     return response.json(
+#         {'message': exception},
+#         status=exception.status_code
+#     )
 
 
 @app.route('/analyze', methods=['GET'])
 async def analyze(request):
-    raw_input = request.raw_args.get('input')
-    if not raw_input:
+    raise ServerError("Invalid Playlist URL")
+    playlists = request.raw_args.values()
+    if not playlists:
         raise InvalidQueryError("Invalid Playlist URL")
-
-    playlists = raw_input.split(',')
 
     analyzed_playlists = []
     for playlist in playlists:
         # TODO: Async per playlist
         music_service = get_music_service(playlist)
         analyzed_playlists.append(music_service.get_playlist())
-
 
     return response.json({
         "playlists": analyzed_playlists

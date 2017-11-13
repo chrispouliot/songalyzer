@@ -8,7 +8,7 @@ const buildQueryParams = (object) => {
       .join('&')
 }
 
-const _fetch = (method, url, object) => {
+async function _fetch(method, url, object) {
   const config = {
     headers: {
       'Accept': 'application/json',
@@ -25,11 +25,15 @@ const _fetch = (method, url, object) => {
       break
     default:
       console.log('what')
+      return Promise.reject()
   }
 
-  return fetch(url, config)
+  const response = await fetch(url, config)
+  if (response.ok) return response.json()
+  console.log(response)
+  throw new Error(response.statusText)
 }
 
-export function analyzePlaylist(object) {
-  return _fetch('GET', analyzeUrl, object).then(resp => resp.json())
+export function analyze(playlists) {
+  return _fetch('GET', analyzeUrl, playlists).then(resp => resp.json())
 }

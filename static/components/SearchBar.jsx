@@ -50,14 +50,13 @@ class SearchBar extends Component {
 
   handleClick() {
     this.props.onClick(this.state.input)
-    this.props.setLoading()
   }
 
   render() {
     return (
       <div style={outerDivStyle}>
         <input style={inputStyle} type="text" value={this.state.input} onChange={this.handleChange} />
-        <button style={buttonStyle} onClick={this.handleClick}>
+        <button style={buttonStyle} onClick={() => this.props.onClick(this.state.input)}>
           Search
         </button>
       </div>)
@@ -66,7 +65,6 @@ class SearchBar extends Component {
 }
 
 SearchBar.propTypes = {
-  setLoading: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
 }
 
