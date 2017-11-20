@@ -17,13 +17,17 @@ TOKEN_EXPIRY_DATE = datetime.datetime.now()
 # TODO: I think the error-handling in this file could be revisited
 
 
-def _authenticate(re_auth=False):
+def _get_auth(re_auth=False):
     global TOKEN_EXPIRY_DATE, GRANTED_TOKEN
-    token_valid = TOKEN_EXPIRY_DATE > datetime.datetime.now()
     
-    if token_valid and not re_auth:
+    if TOKEN_EXPIRY_DATE > datetime.datetime.now() and not re_auth:
         return GRANTED_TOKEN
 
+    GRANTED_TOKEN, TOKEN_EXPIRY_DATE = _authenticate()
+    return GRANTED_TOKEN
+
+
+def _authenticate():
     data = {
         "grant_type": "client_credentials"
     }
@@ -50,13 +54,13 @@ def _authenticate(re_auth=False):
         )
         raise ServiceError("Unable to fulfill your request")
     
-    TOKEN_EXPIRY_DATE = datetime.datetime.now() + datetime.timedelta(seconds=expiry)
-    GRANTED_TOKEN = token
-    return token
+    token_expiry = datetime.datetime.now() + datetime.timedelta(seconds=expiry)
+
+    return token, token_expiry
 
 
 def _get(url):
-    token = _authenticate()
+    token = _get_auth()
     headers = {"Authorization": "Bearer {token}".format(token=token)}
 
     r = make_request(Methods.GET, url, headers=headers)

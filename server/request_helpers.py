@@ -26,7 +26,6 @@ _method_map = {
 
 
 def make_request(method, url, auth=None, headers=None, data=None):
-    # TODO: raise error for invalid get?
     request_func = _method_map.get(method)
     if auth:
         auth = auth._get_request_auth()
