@@ -19,15 +19,17 @@ def get_total_duration(songs):
 
 
 def find_common_songs(songs1, songs2):
-    # TODO: probably can do this more succinctly.. more... better
-    # I'm sure you can filter on object properties
-    match_list_2 = ["{}{}".format(song.title, song.artist) for song in songs2]
-    return [song for song in songs1 if "{}{}".format(song.title, song.artist) in match_list_2]
+    return song_intersection(songs1, songs2, lambda song: "{}{}".format(song.title, song.artist))
 
 
-# TODO: make a generic intersection func for these public funcs
 def find_common_artists(songs1, songs2):
-    artists1 = [song.artist for song in songs1]
-    artists2 = [song.artist for song in songs2]
+    matching_songs = song_intersection(songs1, songs2, "artist")
+    return [song.artist for song in matching_songs]
 
-    return list(set(artists1).intersection(set(artists2)))
+
+def song_intersection(songs1, songs2, attribute):
+    attribute_getter = attribute if callable(attribute) else lambda x: getattr(x, attribute)
+    
+    attrs = {attribute_getter(x) for x in songs1} & {attribute_getter(x) for x in songs2}
+
+    return [song for song in songs1 if attribute_getter(song) in attrs]
